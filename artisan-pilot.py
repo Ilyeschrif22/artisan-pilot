@@ -69,6 +69,39 @@ def list_routes():
     if result.stderr:
         print("Error:", result.stderr)
 
+def create_model():
+    model_name = input("Enter the name of the model: ")
+    print(f"Creating model {model_name}...")
+
+    result = subprocess.run(["cmd", "/c", "php", "artisan", "make:model", model_name],text=True)
+
+    print(result.stdout)
+
+    if result.stderr:
+        print("Error:", result.stderr)
+
+def create_controller():
+    controller_name = input("Enter the name of the controller: ")
+    print(f"Creating controller {controller_name}...")
+
+    result = subprocess.run(["cmd", "/c", "php", "artisan", "make:controller", controller_name],text=True)
+
+    print(result.stdout)
+
+    if result.stderr:
+        print("Error:", result.stderr)
+
+def create_migration():
+    migration_name = input("Enter the name of the migration: ")
+    print(f"Creating migration {migration_name}...")
+
+    result = subprocess.run(["cmd", "/c", "php", "artisan", "make:migration", migration_name],text=True)
+
+    print(result.stdout)
+
+    if result.stderr:
+        print("Error:", result.stderr)
+
 def menu():
     print("1. composer install")
     print("2. create .env")
@@ -76,7 +109,10 @@ def menu():
     print("4. start application")
     print("5. clear cache")
     print("6. routes list")
-
+    print("7. Create model")
+    print("8. Create controller")
+    print("9. Create migration")
+    print("0. Exit")
     choice = input("Enter your choice: ")
     return choice
 
@@ -95,6 +131,15 @@ def response():
             clear_cache()
         elif choice == "6":
             list_routes()
+        elif choice == "7":
+            create_model()
+        elif choice == "8":
+            create_controller()
+        elif choice == "9":
+            create_migration()
+        elif choice == "0":
+            print("Exiting...")
+            break
         else:
             print("Invalid choice. Please try again.")
 
